@@ -19,7 +19,7 @@ def EndCheck():
 
 def ChoiceCheck():
 
-    userChoice = input("Enter your choice: ")
+    userChoice = input("\nEnter your choice: ")
     validChoices = ['1','2','3','4']
 
     while userChoice not in validChoices:
@@ -33,30 +33,38 @@ def PlayerAction():
     EndCheck()
 
     print("---------------------")
-    print(f"Player HP:\t{player.hitPoints}\n")
+    print(f"Player HP:\t{player.hitPoints}")
+    print(f"Player Energy:\t{player.energy}\n")
     sleep(0.5)
     print("Actions:")
     print("---------------------")
     sleep(0.5)
-    print(f"1) {player.attacks[0].name} ({player.attacks[0].damageDice})")
+    print(f"1) {player.attacks[0].name} (Damage: {player.attacks[0].damageDice}) (Energy cost: {player.attacks[0].cost})")
     sleep(0.5)
-    print(f"2) {player.attacks[1].name} ({player.attacks[1].damageDice})")
+    print(f"2) {player.attacks[1].name} (Damage: {player.attacks[1].damageDice}) (Energy cost: {player.attacks[1].cost})")
     sleep(0.5)
-    print(f"3) {player.attacks[2].name} ({player.attacks[2].damageDice})")
+    print(f"3) {player.attacks[2].name} (Damage: {player.attacks[2].damageDice}) (Energy cost: {player.attacks[2].cost})")
     sleep(0.5)
-    print("4) Exit Game")
+    print("4) Rest (Restore Full Energy)")
 
-    userChoice = ChoiceCheck()
+    playerChoice = ChoiceCheck()
+    playerChoice = int(playerChoice) - 1
 
-    if userChoice == '1': userChoice = 0
-    elif userChoice == '2': userChoice = 1
-    elif userChoice == '3': userChoice = 2
+    if playerChoice == 3:
+
+        player.energy = player.energy + 15
+        print("Player is resting...\n")
+
+    elif player.energy >= player.attacks[playerChoice].cost:
+
+        currentMonster.hitPoints = player.attackMonster(playerChoice, D20(), currentMonster.armor, currentMonster.hitPoints)
+
     else:
-        print("Goodbye...")
-        sleep(1)
-        exit()
+        player.energy = player.energy + 15
+        print("Not enough energy!\n")
+        sleep(0.5)
+        print("Player is resting...\n")
 
-    currentMonster.hitPoints = player.attackMonster(userChoice, D20(), currentMonster.armor, currentMonster.hitPoints)
     sleep(1)
     MonsterAction()
 
@@ -66,6 +74,7 @@ def MonsterAction():
 
     player.hitPoints = currentMonster.attackPlayer(D20(), player.armor, player.hitPoints)
 
+    sleep(1)
     PlayerAction()
 
 monsterList = (Goblin(), CaveTroll(), FlameImp())
@@ -76,15 +85,15 @@ print("ENTER THE ARENA!\n")
 sleep(1)
 print("Who will you fight?\n")
 sleep(1)
-print("1) Goblin")
+print(f"1) {monsterList[0].type}")
 sleep(0.5)
-print("2) Cave Troll")
+print(f"2) {monsterList[1].type}")
 sleep(0.5)
-print("3) Flame Imp")
+print(f"3) {monsterList[2].type}")
 sleep(0.5)
 print("4) Random Choice\n")
-sleep(0.5)
-print("Choose wisely...\n")
+sleep(1)
+print("Choose wisely...")
 
 currentMonster = ChoiceCheck()
 

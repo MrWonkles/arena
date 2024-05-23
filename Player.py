@@ -8,11 +8,13 @@ class Player():
         self.name = "Player"
         self.hitPoints = 100
         self.armor = 15
+        self.energy = 15
         self.attacks = (SwordSlash(), QuickStab(), SpinningBlade())
 
     def attackMonster(self, attack, toHit, monsterArmor, monsterHP):
 
         attackChoice = self.attacks[attack]
+        self.energy = self.energy - attackChoice.cost
 
         print(f"{self.name} uses {attackChoice.name}")
         sleep(1)
