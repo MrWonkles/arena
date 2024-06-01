@@ -13,6 +13,16 @@ The focus of this project is to continue practice with Python syntax,
 as well as focus more the practical applications of Git and GitHub
 in regards to version control and version documentation.
 
+## Arena v.2.1 - Small update
+*Completed: 6/1/24*
+
+### Fixes - 
+ - Fixed a bug where Monsters were not resting and had limitless energy.
+
+### Changes - 
+ - The player menu now displays your maximum energy with your current energy.
+ - Players cannot gain energy above their maximum energy limit (currently 15).
+
 ## Arena v2.0 - Energy mechanic update
 *Completed: 5/23/24*
 

@@ -14,7 +14,7 @@ def EndCheck():
         exit()
     elif currentMonster.hitPoints < 1:
         sleep(1)
-        print(f"The {currentMonster.type} has been defeated. You win!")
+        print(f"The {currentMonster.type} has been defeated. You win!\n")
         exit()
 
 def ChoiceCheck():
@@ -32,9 +32,11 @@ def PlayerAction():
 
     EndCheck()
 
+    if player.energy > 15: player.energy = 15
+
     print("---------------------")
     print(f"Player HP:\t{player.hitPoints}")
-    print(f"Player Energy:\t{player.energy}\n")
+    print(f"Player Energy:\t{player.energy} \\ 15\n")
     sleep(0.5)
     print("Actions:")
     print("---------------------")

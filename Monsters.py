@@ -17,6 +17,8 @@ class Monster:
 
         if attackChoice.cost <= self.energy:
 
+            self.energy = self.energy - attackChoice.cost
+
             print(f"{self.type} uses {attackChoice.name}")
             sleep(1)
             print(f"{self.type} rolls {toHit}...")
@@ -34,7 +36,7 @@ class Monster:
         else:
 
             print(f"{self.type} is resting...")
-            self.energy = self.energy + 5
+            self.energy = self.energy + 10
             return playerHP
 
 
